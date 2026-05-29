@@ -1,5 +1,5 @@
-bucket         = "your-tfstate-bucket"
+bucket         = "abcd"
 key            = "dev/terraform.tfstate"
 region         = "ap-southeast-1"
-dynamodb_table = "your-lock-table"
+dynamodb_table = "abcd-lock"
 encrypt        = true
