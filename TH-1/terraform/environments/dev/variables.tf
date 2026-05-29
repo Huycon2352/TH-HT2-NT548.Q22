@@ -134,25 +134,6 @@ variable "nat_eip_domain" {
   default     = "vpc"
 }
 
-# Security Group Descriptions (VPC)
-variable "vpc_default_sg_description" {
-  description = "Description for default VPC security group"
-  type        = string
-  default     = "Default security group for VPC"
-}
-
-variable "vpc_ingress_description" {
-  description = "Description for VPC default security group ingress rule"
-  type        = string
-  default     = "Allow all traffic within VPC"
-}
-
-variable "vpc_egress_description" {
-  description = "Description for VPC security group egress rule"
-  type        = string
-  default     = "Allow all outbound traffic"
-}
-
 # EC2 Instance Type Tags
 variable "public_instance_type" {
   description = "Type tag for public EC2 instance"

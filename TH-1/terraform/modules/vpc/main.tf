@@ -39,34 +39,6 @@ resource "aws_subnet" "private" {
   }
 }
 
-# Default Security Group for VPC
-resource "aws_security_group" "vpc_default" {
-  name        = "${var.project_name}-vpc-default-sg"
-  description = var.vpc_default_sg_description
-  vpc_id      = aws_vpc.main.id
-
-  ingress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = [var.vpc_cidr]
-    description = var.vpc_ingress_description
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = var.egress_cidr_blocks
-    description = var.vpc_egress_description
-  }
-
-  tags = {
-    Name        = "${var.project_name}-vpc-default-sg"
-    Environment = var.environment
-  }
-}
-
 # Internet Gateway
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id

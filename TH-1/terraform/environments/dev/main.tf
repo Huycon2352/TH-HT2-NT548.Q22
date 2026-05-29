@@ -19,9 +19,6 @@ module "vpc" {
   public_subnet_type        = var.public_subnet_type
   private_subnet_type       = var.private_subnet_type
   nat_eip_domain            = var.nat_eip_domain
-  vpc_default_sg_description   = var.vpc_default_sg_description
-  vpc_ingress_description   = var.vpc_ingress_description
-  vpc_egress_description    = var.vpc_egress_description
 }
 
 # EC2 Module

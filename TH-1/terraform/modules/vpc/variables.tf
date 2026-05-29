@@ -86,21 +86,3 @@ variable "nat_eip_domain" {
   type        = string
   default     = "vpc"
 }
-
-variable "vpc_default_sg_description" {
-  description = "Description for default VPC security group"
-  type        = string
-  default     = "Default security group for VPC"
-}
-
-variable "vpc_ingress_description" {
-  description = "Description for VPC default security group ingress rule"
-  type        = string
-  default     = "Allow all traffic within VPC"
-}
-
-variable "vpc_egress_description" {
-  description = "Description for security group egress rule"
-  type        = string
-  default     = "Allow all outbound traffic"
-}
