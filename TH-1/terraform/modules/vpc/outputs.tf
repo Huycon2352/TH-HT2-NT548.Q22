@@ -43,11 +43,6 @@ output "nat_eip" {
   value       = aws_eip.nat.public_ip
 }
 
-output "vpc_default_sg_id" {
-  description = "Default security group ID for VPC"
-  value       = aws_security_group.vpc_default.id
-}
-
 output "public_route_table_id" {
   description = "Public route table ID"
   value       = aws_route_table.public.id
