@@ -76,10 +76,10 @@ output "private_key_location" {
 
 output "ssh_command_public" {
   description = "SSH command to connect to public instance"
-  value       = "ssh -i ${replace(var.public_key_path, ".pub", "")} ubuntu@${module.ec2.public_instance_public_ip}"
+  value       = "ssh -i ${replace(var.public_key_path, ".pub", "")} ec2-user@${module.ec2.public_instance_public_ip}"
 }
 
 output "ssh_command_private" {
   description = "SSH command to connect to private instance (from public instance)"
-  value       = "ssh -i ${replace(var.public_key_path, ".pub", "")} ubuntu@${module.ec2.private_instance_private_ip}"
+  value       = "ssh -i ${replace(var.public_key_path, ".pub", "")} ec2-user@${module.ec2.private_instance_private_ip}"
 }
