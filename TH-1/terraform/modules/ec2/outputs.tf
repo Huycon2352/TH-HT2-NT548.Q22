@@ -32,3 +32,18 @@ output "private_sg_id" {
   description = "Security group ID for private EC2"
   value       = aws_security_group.private_sg.id
 }
+
+output "key_pair_name" {
+  description = "EC2 Key Pair name"
+  value       = aws_key_pair.main.key_name
+}
+
+output "key_pair_fingerprint" {
+  description = "Fingerprint of the key pair"
+  value       = aws_key_pair.main.fingerprint
+}
+
+output "private_key_file" {
+  description = "Private key file name (stored locally on your machine)"
+  value       = "${var.key_name}"
+}

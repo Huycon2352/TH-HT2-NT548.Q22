@@ -48,4 +48,5 @@ module "ec2" {
   private_sg_description       = var.private_sg_description
   private_sg_ssh_description   = var.private_sg_ssh_description
   private_sg_egress_description = var.private_sg_egress_description
+  public_key_path              = var.public_key_path
 }

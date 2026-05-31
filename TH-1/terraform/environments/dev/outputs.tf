@@ -57,3 +57,29 @@ output "private_sg_id" {
   description = "Security group for private EC2"
   value       = module.ec2.private_sg_id
 }
+
+# SSH Key Pair Information
+output "key_pair_name" {
+  description = "EC2 Key Pair name in AWS"
+  value       = module.ec2.key_pair_name
+}
+
+output "key_pair_fingerprint" {
+  description = "Fingerprint of the uploaded public key"
+  value       = module.ec2.key_pair_fingerprint
+}
+
+output "private_key_location" {
+  description = "Location of your private key file (NOT managed by Terraform)"
+  value       = "~/.ssh/${module.ec2.private_key_file} (keep it secure!)"
+}
+
+output "ssh_command_public" {
+  description = "SSH command to connect to public instance"
+  value       = "ssh -i ~/.ssh/${module.ec2.private_key_file} ubuntu@${module.ec2.public_instance_public_ip}"
+}
+
+output "ssh_command_private" {
+  description = "SSH command to connect to private instance (from public instance)"
+  value       = "ssh -i ~/.ssh/${module.ec2.private_key_file} ubuntu@${module.ec2.private_instance_private_ip}"
+}

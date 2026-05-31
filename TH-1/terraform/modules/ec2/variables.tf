@@ -39,6 +39,11 @@ variable "key_name" {
   type        = string
 }
 
+variable "public_key_path" {
+  description = "Path to SSH public key file (e.g., ~/.ssh/id_rsa.pub)"
+  type        = string
+}
+
 variable "ssh_source_cidr" {
   description = "CIDR blocks allowed for SSH access to public EC2"
   type        = list(string)
