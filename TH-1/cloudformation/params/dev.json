@@ -1,0 +1,58 @@
+[
+  {
+    "ParameterKey": "ProjectName",
+    "ParameterValue": "nt548-q22"
+  },
+  {
+    "ParameterKey": "Environment",
+    "ParameterValue": "dev"
+  },
+  {
+    "ParameterKey": "VpcCidr",
+    "ParameterValue": "10.1.0.0/16"
+  },
+  {
+    "ParameterKey": "PublicSubnetCidr",
+    "ParameterValue": "10.1.1.0/24"
+  },
+  {
+    "ParameterKey": "PrivateSubnetCidr",
+    "ParameterValue": "10.1.2.0/24"
+  },
+  {
+    "ParameterKey": "AvailabilityZone",
+    "ParameterValue": "ap-southeast-1a"
+  },
+  {
+    "ParameterKey": "AMIId",
+    "ParameterValue": "ami-0543dbdaf4e114be7"
+  },
+  {
+    "ParameterKey": "InstanceType",
+    "ParameterValue": "t3.micro"
+  },
+  {
+    "ParameterKey": "KeyName",
+    "ParameterValue": "nt548-q22-key"
+  },
+  {
+    "ParameterKey": "SSHPort",
+    "ParameterValue": "22"
+  },
+  {
+    "ParameterKey": "SSHSourceCidr",
+    "ParameterValue": "0.0.0.0/0"
+  },
+  {
+    "ParameterKey": "PublicKeyContent",
+    "ParameterValue": "SSH_PUBLIC_KEY_HERE"
+  },
+  {
+    "ParameterKey": "TemplateUrlVpc",
+    "ParameterValue": "https://your-bucket.s3.amazonaws.com/templates/vpc.yaml"
+  },
+  {
+    "ParameterKey": "TemplateUrlEc2",
+    "ParameterValue": "https://your-bucket.s3.amazonaws.com/templates/ec2.yaml"
+  }
+]
