@@ -71,15 +71,15 @@ output "key_pair_fingerprint" {
 
 output "private_key_location" {
   description = "Location of your private key file (NOT managed by Terraform)"
-  value       = "~/.ssh/${module.ec2.private_key_file} (keep it secure!)"
+  value       = replace(var.public_key_path, ".pub", "")
 }
 
 output "ssh_command_public" {
   description = "SSH command to connect to public instance"
-  value       = "ssh -i ~/.ssh/${module.ec2.private_key_file} ubuntu@${module.ec2.public_instance_public_ip}"
+  value       = "ssh -i ${replace(var.public_key_path, ".pub", "")} ubuntu@${module.ec2.public_instance_public_ip}"
 }
 
 output "ssh_command_private" {
   description = "SSH command to connect to private instance (from public instance)"
-  value       = "ssh -i ~/.ssh/${module.ec2.private_key_file} ubuntu@${module.ec2.private_instance_private_ip}"
+  value       = "ssh -i ${replace(var.public_key_path, ".pub", "")} ubuntu@${module.ec2.private_instance_private_ip}"
 }
