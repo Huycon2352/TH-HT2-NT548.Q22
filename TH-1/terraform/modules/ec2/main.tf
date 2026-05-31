@@ -3,8 +3,8 @@
 # Upload SSH Public Key to AWS
 resource "aws_key_pair" "main" {
   key_name   = var.key_name
-  # Read public key file and trim whitespace
-  public_key = trimspace(file(var.public_key_path))
+  # Read public key file and trim whitespace. pathexpand() expands ~ to home directory
+  public_key = trimspace(file(pathexpand(var.public_key_path)))
 
   tags = {
     Name        = "${var.project_name}-keypair"
