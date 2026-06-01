@@ -10,15 +10,7 @@ private_subnet_cidr = "10.1.2.0/24"
 availability_zone  = "ap-southeast-1a"
 instance_type      = "t3.micro"
 ami_id             = "ami-0543dbdaf4e114be7"
-key_name           = "nt548-q22-key"
 
-# EC2 SSH Public Key Path (from your local machine)
-# Path to your public key file. Examples:
-# - Linux/macOS: ~/.ssh/id_rsa.pub
-# - Windows: C:\Users\YourUsername\.ssh\id_rsa.pub
-
-# EC2 SSH Access Configuration
-ssh_source_cidr    = ["14.169.22.156/32"]
 
 # VPC DNS Configuration
 enable_dns_hostnames    = true
@@ -29,6 +21,7 @@ map_public_ip_on_launch = true
 internet_route_cidr = "0.0.0.0/0"
 enable_all_egress   = true
 egress_cidr_blocks  = ["0.0.0.0/0"]
+
 
 # EC2 Security Configuration (SSH)
 ssh_port     = 22
