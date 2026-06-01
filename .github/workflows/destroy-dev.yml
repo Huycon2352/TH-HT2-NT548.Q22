@@ -51,7 +51,7 @@ jobs:
       - name: Terraform Destroy
         id: destroy
 
-        run: terraform destroy -auto-approve -var-file=terraform.tfvars -lock=false        
+        run: terraform destroy -auto-approve -var-file=terraform.tfvars    
 
       - name: Confirmation
         run: echo "⚠️ Infrastructure destroyed successfully"

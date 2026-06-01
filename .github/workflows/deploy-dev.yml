@@ -47,13 +47,13 @@ jobs:
           EOF
 
       - name: Terraform Init
-        run: terraform init -backend-config=backend.hcl
+        run: terraform init -backend-config=backend.hcl 
 
       - name: Terraform Plan
         run: terraform plan -out=tfplan
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan
+        run: terraform apply tfplan 
 
       - name: Terraform Outputs
         if: success()
