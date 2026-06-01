@@ -1,0 +1,54 @@
+name: Checkov Security Scan
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'TH-1/terraform/**'
+      - '.github/workflows/checkov.yml'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'TH-1/terraform/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checkov-scan:
+    name: Checkov Terraform Security Scan
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: TH-1/terraform
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Checkov
+        run: pip install checkov
+
+      - name: Run Checkov Scan
+        id: checkov
+        run: |
+          checkov -d . \
+            --framework terraform \
+            --check CKV_AWS_8,CKV_AWS_20,CKV_AWS_21,CKV_AWS_24,CKV_AWS_25,CKV_AWS_41,CKV_AWS_46,CKV_AWS_53,CKV_AWS_57,CKV_AWS_277 \
+            --output cli
+        continue-on-error: true
+
+      - name: Set Status
+        run: |
+          if [ ${{ steps.checkov.outcome }} == 'failure' ]; then
+            echo "❌ Checkov scan failed - please fix security issues"
+            exit 1
+          else
+            echo "✅ Checkov scan passed"
+          fi
