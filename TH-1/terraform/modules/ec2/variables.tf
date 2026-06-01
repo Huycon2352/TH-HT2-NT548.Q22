@@ -47,7 +47,7 @@ variable "public_key_path" {
 variable "ssh_source_cidr" {
   description = "CIDR blocks allowed for SSH access to public EC2"
   type        = list(string)
-  default     = ["0.0.0.0/0"]
+  default     = ["14.169.22.156/32"]
 }
 
 # SSH Security Configuration

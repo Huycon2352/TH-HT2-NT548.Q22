@@ -21,6 +21,13 @@ resource "aws_instance" "public" {
   subnet_id              = var.public_subnet_id
   vpc_security_group_ids = [aws_security_group.public_sg.id]
 
+  # Enable EBS encryption - CKV_AWS_8
+  root_block_device {
+    volume_type           = "gp3"
+    delete_on_termination = true
+    encrypted             = true
+  }
+
   tags = {
     Name        = "${var.project_name}-public-ec2"
     Environment = var.environment
@@ -35,6 +42,13 @@ resource "aws_instance" "private" {
   key_name               = var.key_name
   subnet_id              = var.private_subnet_id
   vpc_security_group_ids = [aws_security_group.private_sg.id]
+
+  # Enable EBS encryption - CKV_AWS_8
+  root_block_device {
+    volume_type           = "gp3"
+    delete_on_termination = true
+    encrypted             = true
+  }
 
   tags = {
     Name        = "${var.project_name}-private-ec2"
