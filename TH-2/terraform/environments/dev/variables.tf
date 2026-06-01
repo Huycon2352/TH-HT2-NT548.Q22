@@ -59,6 +59,7 @@ variable "public_key" {
 variable "ssh_source_cidr" {
   description = "CIDR blocks allowed for SSH"
   type        = list(string)
+  default = [ "200.0.0.0/32" ]
 }
 
 # VPC DNS Configuration
