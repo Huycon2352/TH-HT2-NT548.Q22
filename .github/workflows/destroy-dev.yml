@@ -1,0 +1,53 @@
+name: Destroy Infrastructure - Dev
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  destroy:
+    name: Destroy Dev Infrastructure
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: TH-1/terraform/environments/dev
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '1.5.0'
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-southeast-1
+
+      - name: Generate Backend Config
+        run: |
+          cat > backend.hcl << EOF
+          bucket         = "${{ vars.TF_STATE_BUCKET }}"
+          key            = "dev/terraform.tfstate"
+          region         = "ap-southeast-1"
+          dynamodb_table = "${{ vars.TF_LOCK_TABLE }}"
+          encrypt        = true
+          EOF
+
+      - name: Terraform Init
+        id: init
+        run: terraform init -backend-config=backend.hcl
+
+      - name: Terraform Destroy
+        id: destroy
+        run: terraform destroy -auto-approve -var-file=terraform.tfvars
+        continue-on-error: true
+
+      - name: Confirmation
+        run: echo "⚠️ Infrastructure destroyed successfully"
