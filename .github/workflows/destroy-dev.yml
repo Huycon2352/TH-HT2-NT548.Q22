@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TF_VAR_key_name: ${{ vars.TF_VAR_key_name }}
+      TF_VAR_ssh_source_cidr: ${{ vars.TF_VAR_ssh_source_cidr }}
+      TF_VAR_public_key: ${{ secrets.TF_VAR_public_key }}
     defaults:
       run:
         working-directory: TH-2/terraform/environments/dev
