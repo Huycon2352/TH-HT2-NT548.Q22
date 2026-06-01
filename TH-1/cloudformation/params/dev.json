@@ -32,10 +32,6 @@
     "ParameterValue": "t3.micro"
   },
   {
-    "ParameterKey": "KeyName",
-    "ParameterValue": "nt548-q22-key"
-  },
-  {
     "ParameterKey": "SSHPort",
     "ParameterValue": "22"
   },
@@ -44,8 +40,8 @@
     "ParameterValue": "0.0.0.0/0"
   },
   {
-    "ParameterKey": "PublicKeyContent",
-    "ParameterValue": "SSH_PUBLIC_KEY_HERE"
+    "ParameterKey": "KeyName",
+    "ParameterValue": "nt548-q22-key"
   },
   {
     "ParameterKey": "TemplateUrlVpc",

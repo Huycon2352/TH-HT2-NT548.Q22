@@ -39,11 +39,6 @@ Parameters:
     Description: EC2 Key Pair name
     Default: nt548-q22-key
 
-  PublicKeyContent:
-    Type: String
-    Description: SSH Public Key content (from ~/.ssh/my-project-key-nt548.pub)
-    NoEcho: true
-
   SSHPort:
     Type: Number
     Description: SSH port
@@ -93,21 +88,6 @@ Conditions:
   CreateKeyPair: !Equals [!Ref KeyName, 'nt548-q22-key']
 
 Resources:
-  # SSH Key Pair
-  EC2KeyPair:
-    Type: AWS::EC2::KeyPair
-    Condition: CreateKeyPair
-    Properties:
-      KeyName: !Ref KeyName
-      PublicKeyMaterial: !Ref PublicKeyContent
-      Tags:
-        - Key: Name
-          Value: !Sub '${ProjectName}-keypair'
-        - Key: Environment
-          Value: !Ref Environment
-        - Key: ManagedBy
-          Value: CloudFormation
-
   # Public EC2 Security Group
   PublicSecurityGroup:
     Type: AWS::EC2::SecurityGroup

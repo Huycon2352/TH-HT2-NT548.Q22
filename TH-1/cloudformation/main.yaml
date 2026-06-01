@@ -80,13 +80,8 @@ Parameters:
 
   KeyName:
     Type: String
-    Description: EC2 Key Pair name to create
+    Description: EC2 Key Pair name
     Default: nt548-q22-key
-
-  PublicKeyContent:
-    Type: String
-    Description: SSH Public Key content (from ~/.ssh/my-project-key-nt548.pub)
-    NoEcho: true
 
   SSHPort:
     Type: Number
@@ -142,7 +137,6 @@ Resources:
         AMIId: !Ref AMIId
         InstanceType: !Ref InstanceType
         KeyName: !Ref KeyName
-        PublicKeyContent: !Ref PublicKeyContent
         SSHPort: !Ref SSHPort
         SSHSourceCidr: !Ref SSHSourceCidr
       Tags:
