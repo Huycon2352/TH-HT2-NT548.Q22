@@ -10,6 +10,8 @@ jobs:
   destroy:
     name: Destroy Dev Infrastructure
     runs-on: ubuntu-latest
+    env:
+      TF_VAR_key_name: ${{ vars.TF_VAR_key_name }}
     defaults:
       run:
         working-directory: TH-2/terraform/environments/dev
