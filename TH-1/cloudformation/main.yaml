@@ -155,74 +155,50 @@ Outputs:
   VpcId:
     Description: VPC ID
     Value: !GetAtt VPCStack.Outputs.VpcId
-    Export:
-      Name: !Sub '${ProjectName}-VpcId'
 
   PublicSubnetId:
     Description: Public Subnet ID
     Value: !GetAtt VPCStack.Outputs.PublicSubnetId
-    Export:
-      Name: !Sub '${ProjectName}-PublicSubnetId'
 
   PrivateSubnetId:
     Description: Private Subnet ID
     Value: !GetAtt VPCStack.Outputs.PrivateSubnetId
-    Export:
-      Name: !Sub '${ProjectName}-PrivateSubnetId'
 
   NATGatewayEIP:
     Description: NAT Gateway Elastic IP
     Value: !GetAtt VPCStack.Outputs.NATGatewayEIP
-    Export:
-      Name: !Sub '${ProjectName}-NATGatewayEIP'
 
   PublicInstanceId:
     Description: Public EC2 Instance ID
     Value: !GetAtt EC2Stack.Outputs.PublicInstanceId
-    Export:
-      Name: !Sub '${ProjectName}-PublicInstanceId'
 
   PublicInstancePrivateIp:
     Description: Public Instance private IP
     Value: !GetAtt EC2Stack.Outputs.PublicInstancePrivateIp
-    Export:
-      Name: !Sub '${ProjectName}-PublicInstancePrivateIp'
 
   PublicInstancePublicIp:
     Description: Public Instance public IP
     Value: !GetAtt EC2Stack.Outputs.PublicInstancePublicIp
-    Export:
-      Name: !Sub '${ProjectName}-PublicInstancePublicIp'
 
   PrivateInstanceId:
     Description: Private EC2 Instance ID
     Value: !GetAtt EC2Stack.Outputs.PrivateInstanceId
-    Export:
-      Name: !Sub '${ProjectName}-PrivateInstanceId'
 
   PrivateInstancePrivateIp:
     Description: Private Instance private IP
     Value: !GetAtt EC2Stack.Outputs.PrivateInstancePrivateIp
-    Export:
-      Name: !Sub '${ProjectName}-PrivateInstancePrivateIp'
 
   KeyPairName:
     Description: EC2 Key Pair name
     Value: !GetAtt EC2Stack.Outputs.KeyPairName
-    Export:
-      Name: !Sub '${ProjectName}-KeyPairName'
 
   PublicSecurityGroupId:
     Description: Public Security Group ID
     Value: !GetAtt EC2Stack.Outputs.PublicSecurityGroupId
-    Export:
-      Name: !Sub '${ProjectName}-PublicSGId'
 
   PrivateSecurityGroupId:
     Description: Private Security Group ID
     Value: !GetAtt EC2Stack.Outputs.PrivateSecurityGroupId
-    Export:
-      Name: !Sub '${ProjectName}-PrivateSGId'
 
   SSHCommandPublic:
     Description: SSH command to public instance
