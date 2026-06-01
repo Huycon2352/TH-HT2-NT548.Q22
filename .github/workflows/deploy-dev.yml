@@ -10,9 +10,15 @@ jobs:
   deploy:
     name: Deploy Dev Infrastructure
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: TH-2/terraform/environments/dev
+
+    env:
+      TF_VAR_key_name: ${{ vars.TF_VAR_key_name }}
+      TF_VAR_ssh_source_cidr: ${{ vars.TF_VAR_ssh_source_cidr }}
+      TF_VAR_public_key: ${{ secrets.TF_VAR_public_key }}
 
     steps:
       - name: Checkout code
@@ -41,17 +47,12 @@ jobs:
           EOF
 
       - name: Terraform Init
-        id: init
         run: terraform init -backend-config=backend.hcl
 
       - name: Terraform Plan
-        id: plan
         run: terraform plan -out=tfplan
-        continue-on-error: true
 
       - name: Terraform Apply
-        id: apply
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve tfplan
 
       - name: Terraform Outputs
