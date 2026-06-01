@@ -1,15 +1,6 @@
 name: Deploy Infrastructure - Dev
 
 on:
-  push:
-    branches: [main, develop]
-    paths:
-      - 'TH-1/terraform/**'
-      - '.github/workflows/deploy-dev.yml'
-  pull_request:
-    branches: [main, develop]
-    paths:
-      - 'TH-1/terraform/**'
   workflow_dispatch:
 
 permissions:
