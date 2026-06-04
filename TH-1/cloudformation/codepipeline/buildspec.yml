@@ -19,11 +19,11 @@ phases:
     commands:
       - echo "Validating templates..."
 
-      - cfn-lint TH-1/cloudformation/main.yaml
+      - cfn-lint --non-zero-exit-code error TH-1/cloudformation/main.yaml
 
-      - cfn-lint TH-1/cloudformation/templates/vpc.yaml
+      - cfn-lint --non-zero-exit-code error TH-1/cloudformation/templates/vpc.yaml
 
-      - cfn-lint TH-1/cloudformation/templates/ec2.yaml
+      - cfn-lint --non-zero-exit-code error TH-1/cloudformation/templates/ec2.yaml
 
   build:
     commands:
