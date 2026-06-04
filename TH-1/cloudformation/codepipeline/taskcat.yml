@@ -1,5 +1,5 @@
 project:
-  name: nt548-cloudformation
+  name: nt548-q22-cloudformation
 
 tests:
   dev:
@@ -9,4 +9,9 @@ tests:
       - ap-southeast-1
 
     parameters:
+      ProjectName: nt548-q22
       Environment: dev
+
+      TemplateUrlVpc: https://nt548-q22-cfn-templates.s3.ap-southeast-1.amazonaws.com/templates/vpc.yaml
+
+      TemplateUrlEc2: https://nt548-q22-cfn-templates.s3.ap-southeast-1.amazonaws.com/templates/ec2.yaml
