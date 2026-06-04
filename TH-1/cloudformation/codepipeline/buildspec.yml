@@ -1,27 +1,48 @@
 version: 0.2
 
+env:
+  variables:
+    TEMPLATE_BUCKET: nt548-q22-cfn-templates
+
 phases:
+
   install:
     runtime-versions:
       python: 3.12
+
     commands:
-      - echo Installing dependencies...
-      - pip install --upgrade pip
-      - pip install cfn-lint taskcat
+      - echo "Installing dependencies..."
+      - pip install cfn-lint
+      - pip install taskcat
+
+  pre_build:
+    commands:
+      - echo "Validating templates..."
+
+      - cfn-lint TH-1/cloudformation/main.yaml
+
+      - cfn-lint TH-1/cloudformation/templates/vpc.yaml
+
+      - cfn-lint TH-1/cloudformation/templates/ec2.yaml
 
   build:
     commands:
-      - echo Running CloudFormation lint...
+      - echo "Running TaskCat..."
 
-      - cfn-lint ../main.yaml
+      - cd TH-1/cloudformation/codepipeline
 
-      - cfn-lint ../templates/*.yaml
+      - taskcat test run
 
-      - echo Running TaskCat validation...
+      - cd ../../..
 
-      - cd ..
-      - taskcat test run -c codepipeline/taskcat.yml
+  post_build:
+    commands:
+      - echo "Uploading nested templates..."
+
+      - aws s3 cp TH-1/cloudformation/templates/vpc.yaml s3://$TEMPLATE_BUCKET/templates/vpc.yaml
+
+      - aws s3 cp TH-1/cloudformation/templates/ec2.yaml s3://$TEMPLATE_BUCKET/templates/ec2.yaml
 
 artifacts:
   files:
-    - '**/*'
+    - TH-1/cloudformation/main.yaml
