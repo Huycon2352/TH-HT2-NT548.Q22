@@ -8,29 +8,38 @@ phases:
   install:
     runtime-versions:
       python: 3.11
-  
+
     commands:
       - echo "Installing dependencies..."
-  
       - pip install --upgrade pip
-  
       - pip install "setuptools<81"
-  
       - pip install cfn-lint
-  
       - pip install taskcat
 
   pre_build:
     commands:
+      - echo "Validating CloudFormation templates..."
       - cfn-lint --non-zero-exit-code error TH-1/cloudformation/main.yaml
       - cfn-lint --non-zero-exit-code error TH-1/cloudformation/templates/vpc.yaml
       - cfn-lint --non-zero-exit-code error TH-1/cloudformation/templates/ec2.yaml
 
   build:
     commands:
+      - echo "Uploading nested templates to S3..."
+
       - aws s3 cp TH-1/cloudformation/templates/vpc.yaml s3://$TEMPLATE_BUCKET/templates/vpc.yaml
+
       - aws s3 cp TH-1/cloudformation/templates/ec2.yaml s3://$TEMPLATE_BUCKET/templates/ec2.yaml
-      - taskcat test run -c TH-1/cloudformation/codepipeline/taskcat.yml
+
+      - echo "Running TaskCat..."
+
+      - cd TH-1/cloudformation/codepipeline
+
+      - taskcat test run
+
+  post_build:
+    commands:
+      - echo "Build completed."
 
 artifacts:
   files:
