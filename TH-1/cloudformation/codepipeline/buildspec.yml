@@ -7,11 +7,17 @@ env:
 phases:
   install:
     runtime-versions:
-      python: 3.12
+      python: 3.11
+  
     commands:
+      - echo "Installing dependencies..."
+  
       - pip install --upgrade pip
-      - pip install setuptools
+  
+      - pip install "setuptools<81"
+  
       - pip install cfn-lint
+  
       - pip install taskcat
 
   pre_build:
