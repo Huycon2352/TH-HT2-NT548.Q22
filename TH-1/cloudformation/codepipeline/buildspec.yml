@@ -11,8 +11,15 @@ phases:
 
   build:
     commands:
-      - echo "Running cfn-lint"
-      - cfn-lint *.yaml
+      - echo "Running CloudFormation lint..."
 
-      - echo "Running taskcat"
+      - cfn-lint main.yaml
+      - cfn-lint templates/*.yaml
+
+      - echo "Running TaskCat tests..."
+
       - taskcat test run
+
+artifacts:
+  files:
+    - '**/*'
