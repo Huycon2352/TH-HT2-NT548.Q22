@@ -1,0 +1,8 @@
+project:
+  name: aws-infra-test
+
+tests:
+  default:
+    template: master.yaml
+    regions:
+      - ap-southeast-1
