@@ -4,21 +4,23 @@ phases:
   install:
     runtime-versions:
       python: 3.12
-
     commands:
-      - pip install cfn-lint
-      - pip install taskcat
+      - echo Installing dependencies...
+      - pip install --upgrade pip
+      - pip install cfn-lint taskcat
 
   build:
     commands:
-      - echo "Running CloudFormation lint..."
+      - echo Running CloudFormation lint...
 
-      - cfn-lint main.yaml
-      - cfn-lint templates/*.yaml
+      - cfn-lint ../main.yaml
 
-      - echo "Running TaskCat tests..."
+      - cfn-lint ../templates/*.yaml
 
-      - taskcat test run
+      - echo Running TaskCat validation...
+
+      - cd ..
+      - taskcat test run -c codepipeline/taskcat.yml
 
 artifacts:
   files:
