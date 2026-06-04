@@ -1,8 +1,12 @@
 project:
-  name: aws-infra-test
+  name: nt548-cloudformation
 
 tests:
-  default:
-    template: master.yaml
+  dev:
+    template: ../main.yaml
+
     regions:
       - ap-southeast-1
+
+    parameters:
+      Environment: dev
