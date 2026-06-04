@@ -5,13 +5,10 @@ env:
     TEMPLATE_BUCKET: nt548-q22-cfn-templates
 
 phases:
-
   install:
     runtime-versions:
       python: 3.12
-
     commands:
-      - echo "Installing dependencies..."
       - pip install --upgrade pip
       - pip install setuptools
       - pip install cfn-lint
@@ -19,20 +16,14 @@ phases:
 
   pre_build:
     commands:
-      - echo "Validating templates..."
-
       - cfn-lint --non-zero-exit-code error TH-1/cloudformation/main.yaml
       - cfn-lint --non-zero-exit-code error TH-1/cloudformation/templates/vpc.yaml
       - cfn-lint --non-zero-exit-code error TH-1/cloudformation/templates/ec2.yaml
 
   build:
     commands:
-      - echo "Uploading nested templates..."
-
       - aws s3 cp TH-1/cloudformation/templates/vpc.yaml s3://$TEMPLATE_BUCKET/templates/vpc.yaml
       - aws s3 cp TH-1/cloudformation/templates/ec2.yaml s3://$TEMPLATE_BUCKET/templates/ec2.yaml
-
-      - echo "Running TaskCat..."
       - taskcat test run -c TH-1/cloudformation/codepipeline/taskcat.yml
 
 artifacts:
