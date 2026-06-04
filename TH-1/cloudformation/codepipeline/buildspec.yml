@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.12
+
+    commands:
+      - pip install cfn-lint
+      - pip install taskcat
+
+  build:
+    commands:
+      - echo "Running cfn-lint"
+      - cfn-lint *.yaml
+
+      - echo "Running taskcat"
+      - taskcat test run
